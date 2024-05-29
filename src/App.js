@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./styles.css";
+import lightoff from "./image/lightoff.png";
+import lighton from "./image/lighton.png";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = { isOn: false };
+  }
+
+  changeLight() {
+    this.setState((prevState) => ({ isOn: !prevState.isOn }));
+  }
+
+  render() {
+    const { isOn } = this.state;
+
+    return (
+      <div style={{ backgroundColor: isOn ? "white" : "black", minHeight: "100vh" }}>
+        <img src={isOn ? lighton : lightoff} alt="light" />
+        <button onClick={() => this.changeLight()}>
+          {isOn ? "On" : "Off"}
+        </button>
+      </div>
+    );
+  }
 }
 
 export default App;
